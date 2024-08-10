@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { restrauntlist } from "../config"; //  this is called named import
 import Restrauntcard from "./Restrauntcard";
+import Shimmerui from "./Shimmerui";
 
 const Body = () => {
   /// -------------------- useState hook ------------------------
 
   // useing local variable we use state init
   // what are hook  = hook are normal function used for local variable
+  const [allproduct, setAllProduct] = useState([])
+  const [filterrestaurants, setFilterRestaurants] = useState([]);
   const [searchText, setSearchText] = useState(""); // to create state variable
-  const [restaurants, setRestaurants] = useState([]);
   // variable name // function to update the virable
   // the array methos in the useState is the desturctureing
 
@@ -36,11 +38,8 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.07480&lng=72.88560&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const jdata = await data.json();
-    console.log(jdata);
-    setRestaurants(
-      jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    ); // optional chaning
+    setAllProduct( jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle ?.restaurants ); // optional chaning
+    setFilterRestaurants( jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle ?.restaurants );
   }
 
 
@@ -54,13 +53,15 @@ const Body = () => {
   // Filter function to filter restaurants based on search text
   const filterfunction = (searchText, restaurants) => {
     const filterdata = restaurants.filter((restaurant) =>
-      restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
+      restaurant?.info?.name?.toLowerCase()?.includes(searchText.toLowerCase())
     );
     return filterdata;
   };
 
-
-  return (
+  // conditional Rendering
+  return /*ternery opertor*/ allproduct?.length === 0 ? (
+    <Shimmerui/>
+  ) : (
     <>
       <div className="search-container">
         <input
@@ -75,8 +76,8 @@ const Body = () => {
           className="search-btn"
           // Anonymous function used to delay execution until button is clicked
           onClick={() => {
-            const data = filterfunction(searchText, restaurants);
-            setRestaurants(data);
+            const data = filterfunction(searchText, allproduct);
+            setFilterRestaurants(data);
           }}
         >
           Search
@@ -84,9 +85,13 @@ const Body = () => {
       </div>
 
       <div className="card-list">
-        {restaurants.map((restaurant) => (
-          <Restrauntcard key={restaurant.info.id} {...restaurant.info} />
-        ))}
+      {filterrestaurants?.length === 0 ? (
+          <h1>Not found</h1>
+        ) : (
+          filterrestaurants.map((restaurant) => (
+            <Restrauntcard key={restaurant.info.id} {...restaurant.info} />
+          ))
+        )}  
       </div>
     </>
   );
