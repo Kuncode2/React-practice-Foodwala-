@@ -2,7 +2,10 @@ import React from 'react'
 
 const Shimmerui = () => {
   return (
-    <>   Loading................</>
+    <div className='card-list'>
+     {Array(20).fill("").map((e, index) => <div key={index} className='shimmer-card'></div>
+    )}
+    </div>
   )
 }
 

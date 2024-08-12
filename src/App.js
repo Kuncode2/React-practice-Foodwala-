@@ -3,21 +3,64 @@ import ReactDOM from "react-dom/client";
 import Headercomponents from "./components/Headres";
 import Footer from "./components/Footer";
 import Bodys from "./components/Body";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import About from "./components/About";
+import Error from "./components/Error";
+import Contact from "./components/Contact";
+import Body from "./components/Body";
+import ResMenu from "./components/ResMenu";
+import Cart from "./components/Cart";
+
 
 const AppLayout = () => {
   return (
     <>
       <Headercomponents />
-      <Bodys />
+      {/* all the childerns move to the outlet  */}
+      <Outlet/>   
       <Footer />
     </>
   );
 };
 
+const appRouter = createBrowserRouter([
+  {
+    path:"/",
+    element:<AppLayout/>,
+    errorElement:<Error/>,
+    children:[
+      {
+        path:"/",
+        element:<Body/>
+      },
+      {
+        path:"about",
+        element:<About/>  
+      },
+      {
+        path:"contact",
+        element:<Contact/>
+      },
+      {
+        path:"/restraunt/:id",
+        element:<ResMenu/>
+      },
+      {
+        path:"cart",
+        element:<Cart/>
+      }
+      
+    ]
+  },
+])
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+root.render(<RouterProvider router={appRouter}/>); // this is the props
+
+
+
 /*
-// this all are for parcel
+-- this all are for parcel
 * HMR - hot module replacement   --    it's giving the feature that it's update the application without full relode
 * create a server
 * file watcher alogrithm - c++
@@ -42,7 +85,7 @@ root.render(<AppLayout />);
 
 
 *BABBLE(node package) - babel is a transpiler that converts ES6 to ES5- it's use browserslit
-*/
+
 // babble - this will understand the javascript code
 
 
@@ -60,10 +103,10 @@ root.render(<AppLayout />);
 
 //-------------------micro services--------------------(rember the search bar filter)
 
-/* so the micro serveices are like we breaking the code into different diffrent part  try to build that program 
+ *so the micro serveices are like we breaking the code into different diffrent part  try to build that program 
 -  like  ui different and frontend, backend 
 - monomill
-*/
+
 
 
 ///               --- virtual-dom ----------            ///
@@ -71,3 +114,4 @@ root.render(<AppLayout />);
 // reconsalition - it is the process of updating the virutal dom diff,updating,key prop
 
 // react-fiber --> new reconsalition
+*/

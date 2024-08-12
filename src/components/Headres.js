@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Title = () => (
   <a href="/">
@@ -9,6 +10,9 @@ const Title = () => (
   </a>
 );
 
+// Routing
+// spa - single page routing  
+//  client-side-routing (new routing) we don't want to make any call from  => and     server sider routing(all the pages come from server) example:- old http request
 
 const Headercomponents = () => {
 
@@ -23,10 +27,12 @@ const Headercomponents = () => {
       }
       <div className='nav-items'>
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
+          <Link to="/"><li>Home</li></Link>
+
+          <Link to="/about"><li>About</li></Link>
+          <li><Link to="/contact">Contact Us</Link></li>
+          <li><Link to="cart">Cart</Link></li>
+
           {/* javasccript exp and js statement*/}
           {authenticated 
           ? <button onClick={() => { setAuthenticated(false) }}>Logout</button> 

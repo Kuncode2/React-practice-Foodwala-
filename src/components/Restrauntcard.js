@@ -4,7 +4,8 @@ const Restrauntcard = ({ name, cuisines, cloudinaryImageId, avgRating }) => {
   return (
     <div className="card">
       <img src={IMG_CDN_URL + cloudinaryImageId} alt={name} />
-      <h2>{name}</h2> {/* this is optional chaining */}
+      <h2>{name}</h2>
+      {/* This is optional chaning */}
       <h3>{cuisines?.join(", ")}</h3>
       <h4>{avgRating} stars</h4>
     </div>
