@@ -3051,6 +3051,14 @@ const appRouter = (0, _reactRouterDom.createBrowserRouter)([
                     lineNumber: 51,
                     columnNumber: 17
                 }, undefined)
+            },
+            {
+                path: "login",
+                element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginDefault.default), {}, void 0, false, {
+                    fileName: "src/App.js",
+                    lineNumber: 55,
+                    columnNumber: 17
+                }, undefined)
             }
         ]
     },
@@ -3058,7 +3066,7 @@ const appRouter = (0, _reactRouterDom.createBrowserRouter)([
         path: "login",
         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginDefault.default), {}, void 0, false, {
             fileName: "src/App.js",
-            lineNumber: 58,
+            lineNumber: 61,
             columnNumber: 13
         }, undefined)
     }
@@ -3068,7 +3076,7 @@ root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.RouterP
     router: appRouter
 }, void 0, false, {
     fileName: "src/App.js",
-    lineNumber: 63,
+    lineNumber: 68,
     columnNumber: 13
 }, undefined)); // this is the props
  /*
@@ -35394,6 +35402,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRouterDom = require("react-router-dom");
 var _loginCss = require("./css/login.css");
 var _s = $RefreshSig$();
 const Login = ()=>{
@@ -35404,15 +35413,19 @@ const Login = ()=>{
         password: "",
         conformPassword: ""
     });
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    // this is also a hook use for navigation 
     const handleInputChange = (e)=>{
         const { name, value } = e.target;
-        setLogininfo((information)=>({
-                ...information,
+        setLogininfo((prev)=>({
+                ...prev,
                 [name]: value
             }));
     };
-    const handleSignup = ()=>{
+    const handleSignup = (e)=>{
+        e.preventDefault();
         console.log(logininfo);
+        navigate("/");
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "colorss",
@@ -35425,8 +35438,8 @@ const Login = ()=>{
                         children: "Signup"
                     }, void 0, false, {
                         fileName: "src/components/Login.js",
-                        lineNumber: 31,
-                        columnNumber: 7
+                        lineNumber: 35,
+                        columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "signup-components",
@@ -35437,21 +35450,17 @@ const Login = ()=>{
                                     children: [
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                                             htmlFor: "New-username",
-                                            children: [
-                                                " ",
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("b", {
-                                                    children: "New-username:"
-                                                }, void 0, false, {
-                                                    fileName: "src/components/Login.js",
-                                                    lineNumber: 35,
-                                                    columnNumber: 44
-                                                }, undefined),
-                                                " "
-                                            ]
-                                        }, void 0, true, {
+                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("b", {
+                                                children: "New-username:"
+                                            }, void 0, false, {
+                                                fileName: "src/components/Login.js",
+                                                lineNumber: 39,
+                                                columnNumber: 47
+                                            }, undefined)
+                                        }, void 0, false, {
                                             fileName: "src/components/Login.js",
-                                            lineNumber: 35,
-                                            columnNumber: 13
+                                            lineNumber: 39,
+                                            columnNumber: 17
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                             type: "text",
@@ -35461,14 +35470,14 @@ const Login = ()=>{
                                             onChange: handleInputChange
                                         }, void 0, false, {
                                             fileName: "src/components/Login.js",
-                                            lineNumber: 36,
-                                            columnNumber: 13
+                                            lineNumber: 40,
+                                            columnNumber: 17
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/Login.js",
-                                    lineNumber: 34,
-                                    columnNumber: 11
+                                    lineNumber: 38,
+                                    columnNumber: 15
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                     className: "signup-component",
@@ -35479,13 +35488,13 @@ const Login = ()=>{
                                                 children: "Email-id:"
                                             }, void 0, false, {
                                                 fileName: "src/components/Login.js",
-                                                lineNumber: 39,
-                                                columnNumber: 36
+                                                lineNumber: 43,
+                                                columnNumber: 40
                                             }, undefined)
                                         }, void 0, false, {
                                             fileName: "src/components/Login.js",
-                                            lineNumber: 39,
-                                            columnNumber: 13
+                                            lineNumber: 43,
+                                            columnNumber: 17
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                             type: "email",
@@ -35495,14 +35504,14 @@ const Login = ()=>{
                                             onChange: handleInputChange
                                         }, void 0, false, {
                                             fileName: "src/components/Login.js",
-                                            lineNumber: 40,
-                                            columnNumber: 13
+                                            lineNumber: 44,
+                                            columnNumber: 17
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/Login.js",
-                                    lineNumber: 38,
-                                    columnNumber: 11
+                                    lineNumber: 42,
+                                    columnNumber: 15
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                     className: "signup-component",
@@ -35513,13 +35522,13 @@ const Login = ()=>{
                                                 children: "New-Password:"
                                             }, void 0, false, {
                                                 fileName: "src/components/Login.js",
-                                                lineNumber: 43,
-                                                columnNumber: 39
+                                                lineNumber: 47,
+                                                columnNumber: 43
                                             }, undefined)
                                         }, void 0, false, {
                                             fileName: "src/components/Login.js",
-                                            lineNumber: 43,
-                                            columnNumber: 13
+                                            lineNumber: 47,
+                                            columnNumber: 17
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                             type: "password",
@@ -35529,14 +35538,14 @@ const Login = ()=>{
                                             onChange: handleInputChange
                                         }, void 0, false, {
                                             fileName: "src/components/Login.js",
-                                            lineNumber: 44,
-                                            columnNumber: 13
+                                            lineNumber: 48,
+                                            columnNumber: 17
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/Login.js",
-                                    lineNumber: 42,
-                                    columnNumber: 11
+                                    lineNumber: 46,
+                                    columnNumber: 15
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                     className: "signup-component",
@@ -35544,16 +35553,16 @@ const Login = ()=>{
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                                             htmlFor: "conform",
                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("b", {
-                                                children: "Conform-Password: "
+                                                children: "Conform-Password:"
                                             }, void 0, false, {
                                                 fileName: "src/components/Login.js",
-                                                lineNumber: 47,
-                                                columnNumber: 38
+                                                lineNumber: 51,
+                                                columnNumber: 42
                                             }, undefined)
                                         }, void 0, false, {
                                             fileName: "src/components/Login.js",
-                                            lineNumber: 47,
-                                            columnNumber: 13
+                                            lineNumber: 51,
+                                            columnNumber: 17
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                             type: "password",
@@ -35563,53 +35572,57 @@ const Login = ()=>{
                                             onChange: handleInputChange
                                         }, void 0, false, {
                                             fileName: "src/components/Login.js",
-                                            lineNumber: 48,
-                                            columnNumber: 13
+                                            lineNumber: 52,
+                                            columnNumber: 17
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/Login.js",
-                                    lineNumber: 46,
-                                    columnNumber: 11
+                                    lineNumber: 50,
+                                    columnNumber: 15
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                     className: "signup",
                                     onClick: handleSignup,
-                                    children: "signup"
+                                    children: "Signup"
                                 }, void 0, false, {
                                     fileName: "src/components/Login.js",
-                                    lineNumber: 50,
-                                    columnNumber: 11
+                                    lineNumber: 54,
+                                    columnNumber: 15
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/Login.js",
-                            lineNumber: 33,
-                            columnNumber: 9
+                            lineNumber: 37,
+                            columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/Login.js",
-                        lineNumber: 32,
-                        columnNumber: 7
+                        lineNumber: 36,
+                        columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/Login.js",
-                lineNumber: 30,
-                columnNumber: 5
+                lineNumber: 34,
+                columnNumber: 9
             }, undefined)
         }, void 0, false, {
             fileName: "src/components/Login.js",
-            lineNumber: 29,
-            columnNumber: 5
+            lineNumber: 33,
+            columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/Login.js",
-        lineNumber: 28,
+        lineNumber: 32,
         columnNumber: 5
     }, undefined);
 };
-_s(Login, "LOupLm6iNcO9ImWmINsQFAsdN/s=");
+_s(Login, "u7/0GdCsr1pgxHrwNtf593ZXRmw=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
 _c = Login;
 exports.default = Login;
 var _c;
@@ -35620,6 +35633,6 @@ $RefreshReg$(_c, "Login");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./css/login.css":"bgnmx"}],"bgnmx":[function() {},{}]},["9wh9R","1xC6H","2kQhy"], "2kQhy", "parcelRequiree02f")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./css/login.css":"bgnmx","react-router-dom":"9xmpe"}],"bgnmx":[function() {},{}]},["9wh9R","1xC6H","2kQhy"], "2kQhy", "parcelRequiree02f")
 
 //# sourceMappingURL=index.7271efb6.js.map

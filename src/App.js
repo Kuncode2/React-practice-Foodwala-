@@ -49,14 +49,19 @@ const appRouter = createBrowserRouter([
       {
         path:"cart",
         element:<Cart/>
-      }
-      
+      },
+      {
+        path:"login",
+        element:<Login/>
+      },
     ]
   },
   {
     path:"login",
     element:<Login/>
   }
+  
+ 
 ])                        
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
