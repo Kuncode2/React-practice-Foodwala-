@@ -31,12 +31,14 @@ const Headercomponents = () => {
 
           <Link to="/about"><li>About</li></Link>
           <li><Link to="/contact">Contact Us</Link></li>
-          <li><Link to="cart">Cart</Link></li>
+          <li><Link to="/cart">Cart</Link></li>
 
           {/* javasccript exp and js statement*/}
+          <Link to="/login">
           {authenticated 
           ? <button onClick={() => { setAuthenticated(false) }}>Logout</button> 
           : <button onClick={() => { setAuthenticated(true) }}>Login </button>}
+          </Link>
         </ul>
       </div>
     </div>

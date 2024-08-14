@@ -10,6 +10,7 @@ import Contact from "./components/Contact";
 import Body from "./components/Body";
 import ResMenu from "./components/ResMenu";
 import Cart from "./components/Cart";
+import Login from "./components/Login";
 
 
 const AppLayout = () => {
@@ -52,7 +53,11 @@ const appRouter = createBrowserRouter([
       
     ]
   },
-])
+  {
+    path:"login",
+    element:<Login/>
+  }
+])                        
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRouter}/>); // this is the props
