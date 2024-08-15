@@ -11,7 +11,7 @@ import Body from "./components/Body";
 import ResMenu from "./components/ResMenu";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
-
+import Aboutprofile from "./components/Aboutprofile";
 
 const AppLayout = () => {
   return (
@@ -32,11 +32,17 @@ const appRouter = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Body/>
+        element:<Body/>,
       },
       {
         path:"about",
-        element:<About/>  
+        element:<About/>,
+        children:[
+          {
+          path:"profile",
+          element:<Aboutprofile/>
+          }
+        ]
       },
       {
         path:"contact",
