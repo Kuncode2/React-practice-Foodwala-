@@ -1,14 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+  import React from 'react'
+  import { Link } from 'react-router-dom'
 
-const Aboutprofile = () => {
-  return (
-    <div>
-    <Link to="profile"><button>profil</button></Link>
-    
-   
-    </div>
-  )
-}
+  const Aboutprofile = ({test}) => {
 
-export default Aboutprofile
+    const handledata = ()=>{
+      const data = console.log(550005+50500)
+      test(data)
+    }
+
+    return (
+      <div>
+      This is profile
+      <button onClick={handledata}>click me </button>
+      </div>
+    )
+  }
+
+  export default Aboutprofile

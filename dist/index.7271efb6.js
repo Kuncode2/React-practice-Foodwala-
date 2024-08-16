@@ -34897,57 +34897,65 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _config = require("../config"); //  this is called named import
+var _reactRouterDom = require("react-router-dom");
 var _restrauntcard = require("./Restrauntcard");
 var _restrauntcardDefault = parcelHelpers.interopDefault(_restrauntcard);
 var _shimmerui = require("./Shimmerui");
 var _shimmeruiDefault = parcelHelpers.interopDefault(_shimmerui);
-var _reactRouterDom = require("react-router-dom");
 var _s = $RefreshSig$();
 const Body = ()=>{
     _s();
     /// -------------------- useState hook ------------------------
-    // useing local variable we use state init
+    // using local variable we use state init
     // what are hook  = hook are normal function used for local variable
     const [allproduct, setAllProduct] = (0, _react.useState)([]);
     const [filterrestaurants, setFilterRestaurants] = (0, _react.useState)([]);
     const [searchText, setSearchText] = (0, _react.useState)(""); // to create state variable
-    // variable name // function to update the virable
-    // the array methos in the useState is the desturctureing
+    const [minRating, setMinRating] = (0, _react.useState)(""); // New state for rating
+    // variable name // function to update the variable
+    // the array method in the useState is the destructuring
     // the usestate follow two way binding when?
     // when we read and write same time
     // why do we need?
-    //  becuase react can't track each and every variable and and while we changing any variable react don't know what to render for that reson react says use the state
-    // and interreact with react
-    // Handle input change event
+    // because react can't track each and every variable and while we changing any variable react doesn't know what to render for that reason react says use the state
+    // and interact with react
     /// --------------- useEffect---------------- ///
     // react render our components and the useeffect is called
     // empty dependencies array => once after render
-    // dependencies array [searchText] => once after  + everytime my search texxt change
+    // dependencies array [searchText] => once after  + every time my search text changes
     // first render then useeffect
     (0, _react.useEffect)(()=>{
         getRestaurents();
-    }, []); // dependencies array -The dependency array in the useEffect hook in React controls when the effect should run- ( The dependency array in the useEffect hook in React controls when the effect should run )
-    // when there was no dependency array then the useEffect will be call after every render  
+    }, []); // dependencies array - The dependency array in the useEffect hook in React controls when the effect should run
+    // when there was no dependency array then the useEffect will be called after every render
     async function getRestaurents() {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.07480&lng=72.88560&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
         const jdata = await data.json();
-        setAllProduct(jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants); // optional chaning
+        setAllProduct(jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants); // optional chaining
         setFilterRestaurants(jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
     // ------ search-bar--------//
     const onInputChange = (e)=>{
         setSearchText(e.target.value);
     };
+    // New input handler for rating
+    const onRatingChange = (e)=>{
+        setMinRating(e.target.value);
+    };
     // Filter function to filter restaurants based on search text
     const filterfunction = (searchText, restaurants)=>{
         const filterdata = restaurants.filter((restaurant)=>restaurant?.info?.name?.toLowerCase()?.includes(searchText.toLowerCase()));
         return filterdata;
     };
+    // New function to filter restaurants by rating
+    const filterByRating = (minRating, restaurants)=>{
+        const filterdata = restaurants.filter((restaurant)=>restaurant?.info?.avgRating >= minRating);
+        return filterdata;
+    };
     // conditional Rendering
-    return /*ternery opertor*/ allproduct?.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shimmeruiDefault.default), {}, void 0, false, {
+    return /*ternary operator*/ allproduct?.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shimmeruiDefault.default), {}, void 0, false, {
         fileName: "src/components/Body.js",
-        lineNumber: 69,
+        lineNumber: 79,
         columnNumber: 5
     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
@@ -34962,7 +34970,7 @@ const Body = ()=>{
                         value: searchText
                     }, void 0, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 73,
+                        lineNumber: 83,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -34975,13 +34983,40 @@ const Body = ()=>{
                         children: "Search"
                     }, void 0, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 81,
+                        lineNumber: 91,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        onChange: onRatingChange,
+                        type: "number",
+                        className: "rating-input",
+                        placeholder: "Minimum Rating",
+                        value: minRating,
+                        min: "0",
+                        max: "5",
+                        step: "0.1"
+                    }, void 0, false, {
+                        fileName: "src/components/Body.js",
+                        lineNumber: 103,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "rating-btn",
+                        // Anonymous function used to delay execution until button is clicked
+                        onClick: ()=>{
+                            const data = filterByRating(minRating, allproduct);
+                            setFilterRestaurants(data);
+                        },
+                        children: "Search by Rating"
+                    }, void 0, false, {
+                        fileName: "src/components/Body.js",
+                        lineNumber: 114,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/Body.js",
-                lineNumber: 72,
+                lineNumber: 82,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34990,34 +35025,31 @@ const Body = ()=>{
                     children: "Not found"
                 }, void 0, false, {
                     fileName: "src/components/Body.js",
-                    lineNumber: 95,
+                    lineNumber: 128,
                     columnNumber: 11
                 }, undefined) : filterrestaurants.map((restaurant)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                         to: "/restraunt/" + restaurant.info.id,
-                        children: [
-                            " ",
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _restrauntcardDefault.default), {
-                                ...restaurant.info
-                            }, void 0, false, {
-                                fileName: "src/components/Body.js",
-                                lineNumber: 98,
-                                columnNumber: 83
-                            }, undefined)
-                        ]
-                    }, restaurant.info.id, true, {
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _restrauntcardDefault.default), {
+                            ...restaurant.info
+                        }, void 0, false, {
+                            fileName: "src/components/Body.js",
+                            lineNumber: 132,
+                            columnNumber: 15
+                        }, undefined)
+                    }, restaurant.info.id, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 98,
-                        columnNumber: 12
+                        lineNumber: 131,
+                        columnNumber: 13
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/Body.js",
-                lineNumber: 93,
+                lineNumber: 126,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true);
 };
-_s(Body, "iKtKQrFeDClLR6NocKgkSFZgX6s=");
+_s(Body, "sP9RH91hDw7VN0O5KZg4mTALIw4=");
 _c = Body;
 exports.default = Body;
 var _c;
@@ -35028,13 +35060,7 @@ $RefreshReg$(_c, "Body");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../config":"jtCLN","./Restrauntcard":"JoRoJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Shimmerui":"cGF0U","react-router-dom":"9xmpe"}],"jtCLN":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "IMG_CDN_URL", ()=>IMG_CDN_URL);
-const IMG_CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"JoRoJ":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Restrauntcard":"JoRoJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Shimmerui":"cGF0U","react-router-dom":"9xmpe"}],"JoRoJ":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$64ed = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -35098,7 +35124,13 @@ $RefreshReg$(_c, "Restrauntcard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","../config":"jtCLN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cGF0U":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","../config":"jtCLN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jtCLN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "IMG_CDN_URL", ()=>IMG_CDN_URL);
+const IMG_CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cGF0U":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$a8c7 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -35152,28 +35184,57 @@ var _aboutprofile = require("./Aboutprofile");
 var _aboutprofileDefault = parcelHelpers.interopDefault(_aboutprofile);
 var _profileclass = require("./Profileclass");
 var _profileclassDefault = parcelHelpers.interopDefault(_profileclass);
+var _s = $RefreshSig$();
 const About = ()=>{
+    _s();
+    const [datas, setDatas] = (0, _react.useState)("");
+    const testfunction = (data)=>{
+        setDatas(data);
+    };
+    (0, _react.useEffect)(()=>{
+        console.log("This is the test");
+    }, [
+        datas
+    ]);
+    console.log("render");
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
             children: [
-                "this is the about page",
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutprofileDefault.default), {
+                    test: testfunction
+                }, void 0, false, {
+                    fileName: "src/components/About.js",
+                    lineNumber: 20,
+                    columnNumber: 9
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                    children: [
+                        "data from child:",
+                        datas
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/About.js",
+                    lineNumber: 21,
+                    columnNumber: 9
+                }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileclassDefault.default), {}, void 0, false, {
                     fileName: "src/components/About.js",
-                    lineNumber: 9,
+                    lineNumber: 22,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/About.js",
-            lineNumber: 7,
-            columnNumber: 10
+            lineNumber: 19,
+            columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/About.js",
-        lineNumber: 7,
+        lineNumber: 18,
         columnNumber: 5
     }, undefined);
 };
+_s(About, "QIgQ9rzEdY9M6vX+IQKJ1Afb/58=");
 _c = About;
 exports.default = About;
 var _c;
@@ -35197,26 +35258,27 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactRouterDom = require("react-router-dom");
-const Aboutprofile = ()=>{
+const Aboutprofile = ({ test })=>{
+    const handledata = ()=>{
+        const data = console.log(600505);
+        test(data);
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-            to: "profile",
-            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                children: "profil"
+        children: [
+            "This is profile",
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: handledata,
+                children: "click me "
             }, void 0, false, {
                 fileName: "src/components/Aboutprofile.js",
-                lineNumber: 7,
-                columnNumber: 24
+                lineNumber: 14,
+                columnNumber: 7
             }, undefined)
-        }, void 0, false, {
-            fileName: "src/components/Aboutprofile.js",
-            lineNumber: 7,
-            columnNumber: 5
-        }, undefined)
-    }, void 0, false, {
+        ]
+    }, void 0, true, {
         fileName: "src/components/Aboutprofile.js",
-        lineNumber: 6,
-        columnNumber: 5
+        lineNumber: 12,
+        columnNumber: 7
     }, undefined);
 };
 _c = Aboutprofile;
