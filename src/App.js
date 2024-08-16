@@ -1,8 +1,7 @@
-import React from "react";
+import React, { lazy, Suspense } from "react"; // named import
 import ReactDOM from "react-dom/client";
 import Headercomponents from "./components/Headres";
 import Footer from "./components/Footer";
-import Bodys from "./components/Body";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import About from "./components/About";
 import Error from "./components/Error";
@@ -12,13 +11,21 @@ import ResMenu from "./components/ResMenu";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
 import Aboutprofile from "./components/Aboutprofile";
+import Shimmerui from "./components/Shimmerui.js"
+// import InstaMart from "./components/InstaMart";
+
+//------------------------//-------------------------//
+const InstaMart = lazy(() => import("./components/InstaMart"));
+//On demand loading
+
+//-----------------------//--------------------------//
 
 const AppLayout = () => {
   return (
     <>
       <Headercomponents />
       {/* all the childerns move to the outlet  */}
-      <Outlet/>   
+      <Outlet />
       <Footer />
     </>
   );
@@ -26,54 +33,58 @@ const AppLayout = () => {
 
 const appRouter = createBrowserRouter([
   {
-    path:"/",
-    element:<AppLayout/>,
-    errorElement:<Error/>,
-    children:[
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
       {
-        path:"/",
-        element:<Body/>,
+        path: "/",
+        element: <Body />,
       },
       {
-        path:"about",
-        element:<About/>,
-        children:[
+        path: "about",
+        element: <About />,
+        children: [
           {
-          path:"profile",
-          element:<Aboutprofile/>
-          }
-        ]
+            path: "profile",
+            element: <Aboutprofile />,
+          },
+        ],
       },
       {
-        path:"contact",
-        element:<Contact/>
+        path: "contact",
+        element: <Contact />,
       },
       {
-        path:"/restraunt/:id",
-        element:<ResMenu/>
+        path: "/restraunt/:id",
+        element: <ResMenu />,
       },
       {
-        path:"cart",
-        element:<Cart/>
+        path: "cart",
+        element: <Cart />,
       },
       {
-        path:"login",
-        element:<Login/>
+        path: "login",
+        element: <Login />,
       },
-    ]
+      {
+        path: "/instaMart",
+        element: (
+          <Suspense fallback={<Shimmerui/>}>
+            <InstaMart />
+          </Suspense>
+        ),
+      },
+    ],
   },
   {
-    path:"login",
-    element:<Login/>
-  }
-  
- 
-])                        
+    path: "login",
+    element: <Login />,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter}/>); // this is the props
-
-
+root.render(<RouterProvider router={appRouter} />); // this is the props
 
 /*
 -- this all are for parcel
@@ -130,4 +141,20 @@ root.render(<RouterProvider router={appRouter}/>); // this is the props
 // reconsalition - it is the process of updating the virutal dom diff,updating,key prop
 
 // react-fiber --> new reconsalition
+
+
+
+
+// ------------------Moduleraity-----------------------
+// dividing code into different folder
+
+
+
+//------------------TO Handle so many compnents we use differnt bunddler---------------
+    chunking
+    codesplitting
+    dynamic bundlinf
+    lazy loading
+    on Demanding Loading
+    dynamic import
 */

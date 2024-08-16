@@ -2,24 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { IMG_CDN_URL } from '../config'
 import Shimmerui from './Shimmerui'
+import useResMenu from '../utils/useResMenu'
 
-const ResMenu = () => {
+const ResMenu = () => {          
     const {id} = useParams()  // dynamic rule
-    const [menudata,setMenudata]=useState(null)
-
-    useEffect (()=>{
-        getResInfo()
-    },[])   
-
-     async function getResInfo(){
-        const data = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.07480&lng=72.88560&restaurantId="+id )
-       
-        const json = await data.json()
-
-        setMenudata(json?.data?.cards[2]?.card?.card?.info)
-    }
-
-                        
+    const menudata = useResMenu(id)  
 
   return (!menudata) ? <Shimmerui/> :(
     <div>

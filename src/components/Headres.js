@@ -32,6 +32,7 @@ const Headercomponents = () => {
           <Link to="/about"><li>About</li></Link>
           <li><Link to="/contact">Contact Us</Link></li>
           <li><Link to="/cart">Cart</Link></li>
+          <li><Link to="/instaMart">InstaMart</Link></li>
 
           {/* javasccript exp and js statement*/}
           <Link to="/login">

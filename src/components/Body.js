@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Restrauntcard from "./Restrauntcard";
 import Shimmerui from "./Shimmerui";
+import useOnline from "../utils/useOnline";
 
 const Body = () => {
   /// -------------------- useState hook ------------------------
@@ -33,7 +34,7 @@ const Body = () => {
   useEffect(() => {
     getRestaurents();
   }, []); // dependencies array - The dependency array in the useEffect hook in React controls when the effect should run
-          // when there was no dependency array then the useEffect will be called after every render
+  // when there was no dependency array then the useEffect will be called after every render
 
   async function getRestaurents() {
     const data = await fetch(
@@ -41,11 +42,19 @@ const Body = () => {
     );
     const jdata = await data.json();
     setAllProduct(
-      jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     ); // optional chaining
     setFilterRestaurants(
-      jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      jdata?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     );
+  }
+  // --------online and offline-------
+  const isOnline = useOnline();
+
+  if (!isOnline) {
+    return <h1>offline, plz check your connection</h1>;
   }
 
   // ------ search-bar--------//
@@ -128,7 +137,10 @@ const Body = () => {
           <h1>Not found</h1>
         ) : (
           filterrestaurants.map((restaurant) => (
-            <Link to={"/restraunt/" + restaurant.info.id} key={restaurant.info.id}>
+            <Link
+              to={"/restraunt/" + restaurant.info.id}
+              key={restaurant.info.id}
+            >
               <Restrauntcard {...restaurant.info} />
             </Link>
           ))
